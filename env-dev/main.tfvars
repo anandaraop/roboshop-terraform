@@ -26,3 +26,4 @@ min_capacity = 1
 docdb_family         = "docdb4.0"
 docdb_instance_class = "db.t3.medium"
 docdb_instance_count = 1
+docdb_engine_version = 4.0.0

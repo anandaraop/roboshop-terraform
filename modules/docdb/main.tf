@@ -39,6 +39,7 @@ resource "aws_docdb_subnet_group" "main" {
 resource "aws_docdb_cluster" "main" {
   cluster_identifier              = "${var.env}-cluster"
   engine                          = "docdb"
+  engine_version                  = var.engine_version
   master_username                 = var.master_username
   master_password                 = var.master_password
   backup_retention_period         = 5

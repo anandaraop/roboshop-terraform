@@ -13,3 +13,4 @@ variable "vpc_cidr_block" {}
 variable "docdb_family" {}
 variable "docdb_instance_class" {}
 variable "docdb_instance_count" {}
+variable "docdb_engine_version" {}

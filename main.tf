@@ -44,6 +44,7 @@ module "docdb" {
   family                  = var.docdb_family
   instance_class          = var.docdb_instance_class
   instance_count          = var.docdb_instance_count
+  engine_version          = var.docdb_engine_version
   master_password         = "Roboshop12345"
   master_username         = "admin1"
   server_app_port_sg_cidr = var.backend_subnets
