@@ -46,6 +46,25 @@ resource "aws_instance" "instance" {
   }
 }
 
+resource "null_resource" "rabbitmq-setup" {
+  connection {
+    host     = aws_instance.instance.private_ip
+    user     = "ec2-user"
+    password = "DevOps321"
+    type     = "ssh"
+  }
+
+  provisioner "file" {
+    source      = "${path.module}/rabbitmq.sh"
+    destination = "/tmp"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo bash /tmp/rabbitmq.sh",
+    ]
+  }
+}
 
 
 
