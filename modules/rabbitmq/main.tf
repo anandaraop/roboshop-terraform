@@ -49,8 +49,8 @@ resource "aws_instance" "instance" {
 resource "null_resource" "rabbitmq-setup" {
   connection {
     host     = aws_instance.instance.private_ip
-    user     = "ec2-user"
-    password = "DevOps321"
+    user     = jsondecode(data.vault_generic_secret.docdb.data_json).ansible_user
+    password = jsondecode(data.vault_generic_secret.docdb.data_json).ansible_password
     type     = "ssh"
   }
 

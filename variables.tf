@@ -13,6 +13,7 @@ variable "vpc_cidr_block" {}
 variable "docdb" {}
 variable "rds" {}
 variable "rabbitmq" {}
+variable "elasticache" {}
 
 variable "vault_token" {}
 variable "kms_key_id" {}

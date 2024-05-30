@@ -4,3 +4,7 @@ data "aws_ami" "ami" {
   owners      = ["self"]
 }
 
+data "vault_generic_secret" "docdb" {
+  path = "common/common"
+}
+
