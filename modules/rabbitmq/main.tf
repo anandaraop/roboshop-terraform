@@ -56,7 +56,7 @@ resource "null_resource" "rabbitmq-setup" {
 
   provisioner "file" {
     source      = "${path.module}/rabbitmq.sh"
-    destination = "/tmp"
+    destination = "/tmp/rabbitmq.sh"
   }
 
   provisioner "remote-exec" {
