@@ -38,17 +38,36 @@ module "vpc" {
 }
 
 module "docdb" {
-  source = "./modules/docdb"
+  for_each = var.docdb
+  source   = "./modules/docdb"
 
   env                     = var.env
-  family                  = var.docdb_family
-  instance_class          = var.docdb_instance_class
-  instance_count          = var.docdb_instance_count
-  engine_version          = var.docdb_engine_version
-  master_password         = "Roboshop12345"
-  master_username         = "admin1"
+  family                  = each.value["family"]
+  instance_class          = each.value["instance_class"]
+  instance_count          = each.value["instance_count"]
+  engine_version          = each.value["engine_version"]
   server_app_port_sg_cidr = var.backend_subnets
   subnet_ids              = module.vpc.db_subnets
   vpc_id                  = module.vpc.vpc_id
+  kms_key_id              = var.kms_key_id
 }
 
+
+module "rds" {
+  for_each = var.rds
+  source   = "./modules/rds"
+
+  allocated_storage       = each.value["allocated_storage"]
+  engine_version          = each.value["engine_version"]
+  family                  = each.value["family"]
+  instance_class          = each.value["instance_class"]
+  skip_final_snapshot     = each.value["skip_final_snapshot"]
+  storage_type            = each.value["storage_type"]
+  component               = "rds"
+  engine                  = "mysql"
+  env                     = var.env
+  server_app_port_sg_cidr = var.backend_subnets
+  subnet_ids              = module.vpc.db_subnets
+  vpc_id                  = module.vpc.vpc_id
+  kms_key_id              = var.kms_key_id
+}

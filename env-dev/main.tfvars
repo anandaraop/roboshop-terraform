@@ -23,7 +23,25 @@ max_capacity = 5
 min_capacity = 1
 
 
-docdb_family         = "docdb4.0"
-docdb_instance_class = "db.t3.medium"
-docdb_instance_count = 1
-docdb_engine_version = "4.0.0"
+docdb = {
+  main = {
+    family         = "docdb4.0"
+    instance_class = "db.t3.medium"
+    instance_count = 1
+    engine_version = "4.0.0"
+
+  }
+}
+
+rds = {
+  main = {
+    allocated_storage   = 20
+    engine_version      = "5.7.44"
+    family              = "mysql5.7"
+    instance_class      = "db.t3.micro"
+    skip_final_snapshot = true
+    storage_type        = "gp3"
+  }
+}
+
+

@@ -40,13 +40,14 @@ resource "aws_docdb_cluster" "main" {
   cluster_identifier              = "${var.env}-cluster"
   engine                          = "docdb"
   engine_version                  = var.engine_version
-  master_username                 = var.master_username
-  master_password                 = var.master_password
+  master_username                 = jsondecode(data.vault_generic_secret.docdb.data_json).master_username
+  master_password                 = jsondecode(data.vault_generic_secret.docdb.data_json).master_password
   backup_retention_period         = 5
   preferred_backup_window         = "07:00-09:00"
   skip_final_snapshot             = true
   db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.main.name
   db_subnet_group_name            = aws_docdb_subnet_group.main.name
+  kms_key_id                      = var.kms_key_id
 }
 
 resource "aws_docdb_cluster_instance" "main" {
