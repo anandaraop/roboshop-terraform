@@ -48,6 +48,7 @@ resource "aws_docdb_cluster" "main" {
   db_cluster_parameter_group_name = aws_docdb_cluster_parameter_group.main.name
   db_subnet_group_name            = aws_docdb_subnet_group.main.name
   kms_key_id                      = var.kms_key_id
+  storage_encrypted               = true
 }
 
 resource "aws_docdb_cluster_instance" "main" {
