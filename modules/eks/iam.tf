@@ -61,3 +61,7 @@ resource "aws_iam_role_policy_attachment" "node-AmazonEC2ContainerRegistryReadOn
   role       = aws_iam_role.node-role.name
 }
 
+resource "aws_iam_role_policy_attachment" "node-AmazonRoute53AutoNamingFullAccess" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53AutoNamingFullAccess"
+  role       = aws_iam_role.node-role.name
+}
