@@ -61,7 +61,40 @@ resource "aws_iam_role_policy_attachment" "node-AmazonEC2ContainerRegistryReadOn
   role       = aws_iam_role.node-role.name
 }
 
-resource "aws_iam_role_policy_attachment" "node-AmazonRoute53AutoNamingFullAccess" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53AutoNamingFullAccess"
+resource "aws_iam_policy" "node-externalDNS" {
+  name        = "${var.env}-node-externalDNS"
+  path        = "/"
+  description = "${var.env}-node-externalDNS"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ChangeResourceRecordSets"
+      ],
+      "Resource": [
+        "arn:aws:route53:::hostedzone/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ListHostedZones",
+        "route53:ListResourceRecordSets",
+        "route53:ListTagsForResource"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "node-externalDNS" {
+  policy_arn = aws_iam_policy.node-externalDNS.arn
   role       = aws_iam_role.node-role.name
 }
