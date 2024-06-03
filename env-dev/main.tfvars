@@ -3,15 +3,15 @@ instance_type = "t3.small"
 zone_id       = "Z02385991VFZVIKN8WPK8"
 
 # VPC
-vpc_cidr_block         = "10.10.0.0/24"
+vpc_cidr_block         = "10.10.0.0/16"
 default_vpc_cidr       = "172.31.0.0/16"
 default_vpc_id         = "vpc-0a8e3e6a0d6cb90d9"
 default_route_table_id = "rtb-0b9a867762d6530ba"
 
-frontend_subnets   = ["10.10.0.0/27", "10.10.0.32/27"]
-backend_subnets    = ["10.10.0.64/27", "10.10.0.96/27"]
-db_subnets         = ["10.10.0.128/27", "10.10.0.160/27"]
-public_subnets     = ["10.10.0.192/27", "10.10.0.224/27"]
+frontend_subnets   = ["10.10.0.0/24", "10.10.1.0/24"]
+backend_subnets    = ["10.10.2.0/24", "10.10.3.0/24"]
+db_subnets         = ["10.10.4.0/24", "10.10.5.0/24"]
+public_subnets     = ["10.10.6.0/24", "10.10.7.0/24"]
 availability_zones = ["us-east-1a", "us-east-1b"]
 bastion_nodes      = ["172.31.2.254/32"]
 prometheus_nodes   = ["172.31.89.157/32"]
