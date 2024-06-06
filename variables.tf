@@ -20,5 +20,6 @@ variable "kms_key_id" {}
 
 variable "bastion_nodes" {}
 variable "prometheus_nodes" {}
+variable "zone_id" {}
 
 
