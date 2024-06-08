@@ -72,3 +72,11 @@ aws-auth upsert --maproles --rolearn arn:aws:iam::633788536644:role/ci-server-ro
 EOF
   }
 }
+
+
+resource "aws_eks_addon" "addon-ebs" {
+  cluster_name = aws_eks_cluster.cluster.name
+  addon_name   = "aws-ebs-csi-driver"
+}
+
+
