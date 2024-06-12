@@ -43,7 +43,7 @@ resource "aws_eks_node_group" "memory" {
   node_role_arn   = aws_iam_role.node-role.arn
   subnet_ids      = var.subnet_ids
   capacity_type   = "SPOT"
-  instance_types  = ["r7i.large"]
+  instance_types  = ["r7i.large","r7i.xlarge","r6i.large","r6i.xlarge"]
 
   launch_template {
     name    = "eks-${var.env}"
