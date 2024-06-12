@@ -60,7 +60,7 @@ resource "aws_eks_node_group" "memory" {
     max_unavailable = 1
   }
 
-  labels {
+  labels = {
     appType = "memory-intensive"
   }
 
@@ -89,7 +89,7 @@ resource "aws_eks_node_group" "general" {
     max_unavailable = 1
   }
 
-  labels {
+  labels = {
     appType = "general"
   }
 
