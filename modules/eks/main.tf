@@ -39,7 +39,7 @@ resource "aws_launch_template" "main" {
 
 resource "aws_eks_node_group" "memory" {
   cluster_name    = aws_eks_cluster.cluster.name
-  node_group_name = "${var.env}-eks-ng-2"
+  node_group_name = "${var.env}-eks-ng-3"
   node_role_arn   = aws_iam_role.node-role.arn
   subnet_ids      = var.subnet_ids
   capacity_type   = "SPOT"
