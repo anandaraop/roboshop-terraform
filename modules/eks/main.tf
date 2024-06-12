@@ -37,7 +37,7 @@ resource "aws_launch_template" "main" {
   }
 }
 
-resource "aws_eks_node_group" "main" {
+resource "aws_eks_node_group" "memory" {
   cluster_name    = aws_eks_cluster.cluster.name
   node_group_name = "${var.env}-eks-ng-2"
   node_role_arn   = aws_iam_role.node-role.arn
@@ -59,6 +59,40 @@ resource "aws_eks_node_group" "main" {
   update_config {
     max_unavailable = 1
   }
+
+  labels {
+    appType = "memory-intensive"
+  }
+
+}
+
+resource "aws_eks_node_group" "general" {
+  cluster_name    = aws_eks_cluster.cluster.name
+  node_group_name = "${var.env}-eks-ng-2"
+  node_role_arn   = aws_iam_role.node-role.arn
+  subnet_ids      = var.subnet_ids
+  capacity_type   = "SPOT"
+  instance_types  = ["t3.xlarge"]
+
+  launch_template {
+    name    = "eks-${var.env}"
+    version = "$Latest"
+  }
+
+  scaling_config {
+    desired_size = 1
+    max_size     = 10
+    min_size     = 1
+  }
+
+  update_config {
+    max_unavailable = 1
+  }
+
+  labels {
+    appType = "general"
+  }
+
 }
 
 resource "null_resource" "aws-auth" {
