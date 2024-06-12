@@ -97,7 +97,7 @@ resource "aws_eks_node_group" "general" {
 
 resource "null_resource" "aws-auth" {
 
-  depends_on = [aws_eks_node_group.main]
+  depends_on = [aws_eks_node_group.general]
 
   provisioner "local-exec" {
     command = <<EOF
